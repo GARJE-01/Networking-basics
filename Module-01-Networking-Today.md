@@ -42,29 +42,21 @@ If every device worked alone, a laptop couldn't browse the web, send email, use 
 
 At a high level, a message travels through several stages to reach its destination:
 
-```
-  📱 Device generates data
-        │
-        ▼
-  🏠 Local network (e.g., home Wi-Fi)
-        │
-        ▼
-  🏢 Internet Service Provider (ISP)
-        │
-        ▼
-  🌐 Internet
-        │
-        ▼
-  🏠 Destination network
-        │
-        ▼
-  📱 Destination device
+```mermaid
+flowchart TD
+    A[📱 Device generates data] --> B[🏠 Local network <br/> e.g., home Wi-Fi]
+    B --> C[🏢 Internet Service Provider <br/> ISP]
+    C --> D[🌐 Internet]
+    D --> E[🏠 Destination network]
+    E --> F[📱 Destination device]
 ```
 
 **Example – sending a WhatsApp message:**
 
-```
-Phone → Home Wi-Fi → Router → ISP → Internet → WhatsApp Server → Friend's ISP → Friend's Wi-Fi → Friend's Phone
+```mermaid
+flowchart LR
+    P[Phone] --> W[Home Wi-Fi] --> R[Router] --> I[ISP] --> Int((Internet)) --> WS[WhatsApp Server]
+    WS --> Int --> FI[Friend's ISP] --> FW[Friend's Wi-Fi] --> FP[Friend's Phone]
 ```
 
 ## 🧩 Key Components
@@ -106,23 +98,19 @@ Networks are grouped by size and purpose:
 
 **Internet Communication Diagram:**
 
-```
-  📱 Phone    \
-  📱 Tablet  --\
-  💻 Laptop  ---\
-                 \
-            🏠 Local Network
-                  │
-               🔀 Router
-                  │
-               🏢 ISP
-                  │
-              🌐 Internet
-                  │
-     ┌────────────┼────────────┐
-     │            │            │
-  🎮 Gaming   📹 Video     📧 Email
-   Server     Call Server   Server
+```mermaid
+flowchart TD
+    Phone[📱 Phone] --> LocalNet[🏠 Local Network]
+    Tablet[📱 Tablet] --> LocalNet
+    Laptop[💻 Laptop] --> LocalNet
+    
+    LocalNet --> Router[🔀 Router]
+    Router --> ISP[🏢 ISP]
+    ISP --> Internet((🌐 Internet))
+    
+    Internet --> Gaming[🎮 Gaming Server]
+    Internet --> Video[📹 Video Call Server]
+    Internet --> Email[📧 Email Server]
 ```
 
 - **End devices** (phone, laptop, tablet) generate and receive data.
@@ -132,6 +120,7 @@ Networks are grouped by size and purpose:
 - **Internet** carries data between networks worldwide.
 - **Servers** deliver the actual applications and services.
 
+> [!NOTE]  
 > **🔄 Communication sequence:** the device creates data → it reaches the local router → the router forwards it to the ISP → the ISP sends it across the Internet → the destination server/device receives it → a reply follows the reverse path.
 
 ## 🌍 Real-Life Example
@@ -140,37 +129,24 @@ A student's college Wi-Fi connects through college switches and a router to the 
 
 ## 📌 Important Facts
 
-- A network connects devices so they can communicate and share resources.
-- The Internet is the world's largest network of interconnected networks — a **"network of networks."**
-- No single person or company owns the Internet; it is decentralized and made of millions of independent networks agreeing to use common protocols.
-- Bandwidth and throughput (covered later) are introduced here conceptually: **bandwidth** is the maximum network capacity, while **throughput** is the actual speed experienced.
-- Modern "connected" devices go far beyond computers: smartphones, tablets, smartwatches, and smart glasses are everyday examples, and many of these qualify as IoT devices.
+> [!IMPORTANT]
+> - A network connects devices so they can communicate and share resources.
+> - The Internet is the world's largest network of interconnected networks — a **"network of networks."**
+> - No single person or company owns the Internet; it is decentralized and made of millions of independent networks agreeing to use common protocols.
+> - Bandwidth and throughput (covered later) are introduced here conceptually: **bandwidth** is the maximum network capacity, while **throughput** is the actual speed experienced.
+> - Modern "connected" devices go far beyond computers: smartphones, tablets, smartwatches, and smart glasses are everyday examples, and many of these qualify as IoT devices.
 
 ## ⚠️ Common Beginner Mistakes
 
-- **Mistake:** Thinking "Internet" and "network" mean the same thing.
-
-    **Why it happens:** The terms are used interchangeably in casual speech.
-
-    **Correct understanding:** The Internet is one very large network made up of many smaller networks.
-
-- **Mistake:** Assuming only computers use networks.
-
-    **Why it happens:** Networking is historically associated with PCs.
-
-    **Correct understanding:** Phones, TVs, printers, watches, cameras, and sensors all use networks too.
-
-- **Mistake:** Believing someone owns the entire Internet.
-
-    **Why it happens:** Large companies like ISPs are visible, giving an impression of central ownership.
-
-    **Correct understanding:** The Internet is decentralized; many organizations operate interconnected networks using shared standards.
-
-- **Mistake:** Thinking Wi-Fi *is* the Internet.
-
-    **Why it happens:** Wi-Fi is the most visible part of going online at home.
-
-    **Correct understanding:** Wi-Fi only connects a device to a local network; Internet access comes through the router and ISP.
+> [!WARNING]
+> - **Mistake:** Thinking "Internet" and "network" mean the same thing.
+>   **Correct understanding:** The Internet is one very large network made up of many smaller networks.
+> - **Mistake:** Assuming only computers use networks.
+>   **Correct understanding:** Phones, TVs, printers, watches, cameras, and sensors all use networks too.
+> - **Mistake:** Believing someone owns the entire Internet.
+>   **Correct understanding:** The Internet is decentralized; many organizations operate interconnected networks using shared standards.
+> - **Mistake:** Thinking Wi-Fi *is* the Internet.
+>   **Correct understanding:** Wi-Fi only connects a device to a local network; Internet access comes through the router and ISP.
 
 ## 📊 Comparisons
 
@@ -198,6 +174,7 @@ A student's college Wi-Fi connects through college switches and a router to the 
 
 Beyond laptops and phones, many ordinary objects — security cameras, smart TVs, refrigerators, washing machines, cars, medical devices, farm sensors, and RFID tags — can also connect to a network and send, receive, or process data. This collection of Internet-connected physical devices is called the **Internet of Things (IoT)**.
 
+> [!TIP]
 > **📌 IoT:** A network of physical devices connected to the Internet that can collect data, communicate, and often be monitored or controlled remotely.
 
 ## ❓ Why do we need it?
@@ -206,24 +183,15 @@ IoT lets people check on their home, monitor elderly relatives' health, automate
 
 ## ⚙️ How does it work?
 
-```
-  📡 The device collects information
-     (e.g., a camera captures video, a sensor measures temperature)
-        │
-        ▼
-  📶 The device connects to a local network
-     via Wi-Fi, Ethernet, Bluetooth, or cellular
-        │
-        ▼
-  ☁️ Data is sent to a phone, cloud server, or monitoring software
-        │
-        ▼
-  📱 The user views or controls the device remotely
-     (e.g., a "motion detected" notification)
-        │
-        ▼
-  ✅ The user responds — watching footage, unlocking a door,
-     turning on lights, or calling for help
+```mermaid
+flowchart TD
+    A[📡 The device collects information <br/> e.g., camera captures video, sensor measures temperature]
+    B[📶 The device connects to a local network <br/> via Wi-Fi, Ethernet, Bluetooth, or cellular]
+    C[☁️ Data is sent to a phone, cloud server, or monitoring software]
+    D[📱 The user views or controls the device remotely <br/> e.g., a 'motion detected' notification]
+    E[✅ The user responds <br/> watching footage, unlocking a door, turning on lights, or calling for help]
+    
+    A --> B --> C --> D --> E
 ```
 
 ## 🧩 Key Components
@@ -254,43 +222,37 @@ IoT lets people check on their home, monitor elderly relatives' health, automate
 
 **📹 Security camera example:**
 
-```
-Security Camera → Home Wi-Fi Router → Internet → Smartphone
+```mermaid
+flowchart LR
+    Cam[Security Camera] --> WiFi[Home Wi-Fi Router] --> Int((Internet)) --> Phone[Smartphone]
 ```
 
 **🧊 Smart appliance example:**
 
-```
-Appliance → Home Wi-Fi → Cloud Server → Phone Notification
+```mermaid
+flowchart LR
+    App[Appliance] --> WiFi[Home Wi-Fi] --> Cloud[Cloud Server] --> Note[Phone Notification]
 ```
 
 **🏷️ RFID example:**
 
-```
-RFID Tag )))radio waves))) RFID Reader → Computer Database
+```mermaid
+flowchart LR
+    Tag[RFID Tag] -- )))radio waves))) --> Reader[RFID Reader] --> DB[(Computer Database)]
 ```
 
 **🌐 General IoT communication flow:**
 
-```
-  📡 Sensor / Smart Device
-        │
-        ▼
-  🏠 Home Router
-        │
-        ▼
-  🌐 Internet
-        │
-        ▼
-  ☁️ Cloud Platform
-        │
-        ▼
-  📱 Mobile App
-        │
-        ▼
-  👤 User receives data or sends control commands
+```mermaid
+flowchart TD
+    Sensor[📡 Sensor / Smart Device] --> Router[🏠 Home Router]
+    Router --> Internet((🌐 Internet))
+    Internet --> Cloud[☁️ Cloud Platform]
+    Cloud --> App[📱 Mobile App]
+    App --> User[👤 User receives data or sends control commands]
 ```
 
+> [!NOTE]  
 > **🔄 Communication sequence:** the device collects data or waits for commands → sends data through the local network → the Internet carries it to a cloud service → the cloud forwards it to the user's app → the user views status or sends control commands back.
 
 ## 🌍 Real-Life Example
@@ -299,59 +261,41 @@ While away from home, a person can check a smart camera, smart TV, smart refrige
 
 **🌾 Agricultural sensor/actuator process:**
 
-```
-  🌱 Soil becomes dry
-        │
-        ▼
-  🌡️ Sensor detects dryness
-        │
-        ▼
-  📊 Data sent to monitoring station
-        │
-        ▼
-  🧠 Controller decides
-        │
-        ▼
-  🤖 Actuator turns on water pump
-        │
-        ▼
-  💧 Plants receive water
-        │
-        ▼
-  🌡️ Sensor detects enough moisture
-        │
-        ▼
-  🛑 Pump turns off
+```mermaid
+flowchart TD
+    Dry[🌱 Soil becomes dry] --> Sens1[🌡️ Sensor detects dryness]
+    Sens1 --> Data[📊 Data sent to monitoring station]
+    Data --> Ctrl[🧠 Controller decides]
+    Ctrl --> Act[🤖 Actuator turns on water pump]
+    Act --> Water[💧 Plants receive water]
+    Water --> Sens2[🌡️ Sensor detects enough moisture]
+    Sens2 --> Stop[🛑 Pump turns off]
 ```
 
+> [!NOTE]
 > This entire cycle happens **automatically**.
 
 ## 📌 Important Facts
 
-- IoT stands for **Internet of Things**.
-- IoT devices are physical objects connected to the Internet that collect, send, or receive data.
-- Home IoT examples: security systems, smart appliances, smart TVs, gaming consoles.
-- Other IoT examples: smart cars, RFID systems, sensors, actuators, medical devices.
-- Sensors gather information; actuators perform actions.
-- RFID uses radio waves and often doesn't require direct line-of-sight, unlike a barcode.
+> [!IMPORTANT]
+> - IoT stands for **Internet of Things**.
+> - IoT devices are physical objects connected to the Internet that collect, send, or receive data.
+> - Home IoT examples: security systems, smart appliances, smart TVs, gaming consoles.
+> - Other IoT examples: smart cars, RFID systems, sensors, actuators, medical devices.
+> - Sensors gather information; actuators perform actions.
+> - RFID uses radio waves and often doesn't require direct line-of-sight, unlike a barcode.
 
 ## ⚠️ Common Beginner Mistakes
 
-- **Mistake:** Assuming every electronic device is an IoT device.
-
-    **Correct understanding:** A device is part of IoT only if it can communicate over a network.
-
-- **Mistake:** Treating sensors and actuators as the same thing.
-
-    **Correct understanding:** A sensor detects or measures; an actuator performs an action.
-
-- **Mistake:** Assuming smart TVs only watch Internet videos.
-
-    **Correct understanding:** Smart TVs are networked computers capable of running apps, browsing the web, and receiving updates.
-
-- **Mistake:** Confusing RFID with a barcode.
-
-    **Correct understanding:** RFID uses radio waves and often doesn't need direct line-of-sight, while barcodes must be visually scanned.
+> [!WARNING]
+> - **Mistake:** Assuming every electronic device is an IoT device.
+>   **Correct understanding:** A device is part of IoT only if it can communicate over a network.
+> - **Mistake:** Treating sensors and actuators as the same thing.
+>   **Correct understanding:** A sensor detects or measures; an actuator performs an action.
+> - **Mistake:** Assuming smart TVs only watch Internet videos.
+>   **Correct understanding:** Smart TVs are networked computers capable of running apps, browsing the web, and receiving updates.
+> - **Mistake:** Confusing RFID with a barcode.
+>   **Correct understanding:** RFID uses radio waves and often doesn't need direct line-of-sight, while barcodes must be visually scanned.
 
 ## 📖 Key Terms
 
@@ -389,25 +333,20 @@ Humans communicate with letters, pictures, and sounds, but computers only unders
 
 **Sending the word "HELLO":**
 
-```
-  ⌨️ You type HELLO
-        │
-        ▼
-  💻 The OS converts each letter into binary (ASCII)
-     e.g. H = 01001000, E = 01000101, L = 01001100
-        │
-        ▼
-  📦 The computer groups these bits into bytes
-        │
-        ▼
-  ⚡ The bits become electrical, light, or radio signals
-        │
-        ▼
-  🌐 The signals travel through the network
-        │
-        ▼
-  📱 The receiving computer converts the binary back
-     into letters, displaying HELLO
+```mermaid
+sequenceDiagram
+    participant User
+    participant PC1 as Sending PC
+    participant Net as Network
+    participant PC2 as Receiving PC
+    
+    User->>PC1: ⌨️ Type HELLO
+    Note over PC1: Converts to ASCII Binary:<br/>01001000 01000101 01001100...
+    Note over PC1: Groups bits into bytes
+    PC1->>Net: ⚡ Convert to electrical/light/radio signals
+    Net->>PC2: 🌐 Signals travel
+    Note over PC2: Converts binary back to letters
+    PC2-->>User: 📱 Displays HELLO
 ```
 
 ## 🧩 Key Components
@@ -423,19 +362,16 @@ Humans communicate with letters, pictures, and sounds, but computers only unders
 ### 🔒 Personal Data Types
 
 **📝 Volunteered Data**
-
 - **Definition:** data intentionally provided by the user.
 - **Characteristics:** the person knows the information is being shared.
 - **Example:** typing your name, email, and phone number into a sign-up form.
 
 **🔎 Inferred Data**
-
 - **Definition:** data a company learns from behavior, even without being told directly.
 - **Characteristics:** derived from patterns rather than stated facts.
 - **Example:** a bank inferring a customer traveled because their card was used in a different city, without being informed directly.
 
 **📍 Observed Data**
-
 - **Definition:** information collected automatically.
 - **Characteristics:** gathered passively, e.g. through sensors or location services.
 - **Example:** a phone automatically sending its current location to a carrier's database.
@@ -443,19 +379,16 @@ Humans communicate with letters, pictures, and sounds, but computers only unders
 ### 📡 Data Transmission Methods
 
 **⚡ Electrical Signals**
-
 - **Definition:** binary converted into electrical pulses.
 - **Characteristics:** used on copper Ethernet cables; cheap, common, and easy to install, but limited distance and susceptible to electrical interference.
 - **Example:** a wired Ethernet connection between two computers.
 
 **💡 Optical Signals**
-
 - **Definition:** binary converted into pulses of light.
 - **Characteristics:** used on fiber-optic cables; very fast, long distance, immune to electromagnetic interference, and high bandwidth, but more expensive and requires specialized equipment.
 - **Example:** a fiber backbone connecting two buildings.
 
 **📶 Wireless Signals**
-
 - **Definition:** binary converted into radio waves.
 - **Characteristics:** used in Wi-Fi, Bluetooth, and cellular (4G/5G); offers mobility and easy installation, but can suffer interference and is generally slower than fiber.
 - **Example:** a laptop connecting to a router over Wi-Fi.
@@ -464,37 +397,30 @@ Humans communicate with letters, pictures, and sounds, but computers only unders
 
 The same binary data can travel over three different media — only the carrying method changes:
 
-```
-PC1 → ⚡ Electrical Pulse → PC2     (copper cable)
-PC1 → 💡 Light Pulse     → PC2     (fiber cable)
-PC1 → 📶 Radio Waves     → PC2     (wireless)
+```mermaid
+flowchart LR
+    subgraph Copper Cable
+        PC1_E[PC1] -- ⚡ Electrical Pulse --> PC2_E[PC2]
+    end
+    subgraph Fiber Cable
+        PC1_F[PC1] -- 💡 Light Pulse --> PC2_F[PC2]
+    end
+    subgraph Wireless
+        PC1_W[PC1] -- 📶 Radio Waves --> PC2_W[PC2]
+    end
 ```
 
 **Overall data transmission process:**
 
-```
-  👤 Human Types Message
-        │
-        ▼
-  💻 Computer Converts to Binary
-        │
-        ▼
-  🔢 Binary (0s and 1s)
-        │
-        ▼
-  📡 Signal Conversion (Electricity / Light / Radio)
-        │
-        ▼
-  🔌 Network Media
-        │
-        ▼
-  💻 Receiving Computer
-        │
-        ▼
-  🔢 Binary Converted Back
-        │
-        ▼
-  📩 Message Displayed
+```mermaid
+flowchart TD
+    A[👤 Human Types Message] --> B[💻 Computer Converts to Binary]
+    B --> C[🔢 Binary 0s and 1s]
+    C --> D[📡 Signal Conversion: Electricity / Light / Radio]
+    D --> E[🔌 Network Media]
+    E --> F[💻 Receiving Computer]
+    F --> G[🔢 Binary Converted Back]
+    G --> H[📩 Message Displayed]
 ```
 
 ## 🌍 Real-Life Example
@@ -503,33 +429,26 @@ Sending a selfie over Wi-Fi: the photo becomes millions of bits, the phone conve
 
 ## 📌 Important Facts
 
-- A bit is the smallest unit of data and can only be 0 or 1.
-- 8 bits = 1 byte.
-- ASCII maps characters to unique binary values.
-- Copper cable carries electrical pulses; fiber-optic cable carries light pulses; wireless carries radio waves.
-- Personal data is categorized as volunteered, inferred, or observed.
+> [!IMPORTANT]
+> - A bit is the smallest unit of data and can only be 0 or 1.
+> - 8 bits = 1 byte.
+> - ASCII maps characters to unique binary values.
+> - Copper cable carries electrical pulses; fiber-optic cable carries light pulses; wireless carries radio waves.
+> - Personal data is categorized as volunteered, inferred, or observed.
 
 ## ⚠️ Common Beginner Mistakes
 
-- **Mistake:** Thinking a bit and a byte are the same.
-
-    **Correct understanding:** A bit is one binary digit; a byte is a group of 8 bits.
-
-- **Mistake:** Believing computers store letters directly.
-
-    **Correct understanding:** Computers store only binary representations of letters (e.g., ASCII or Unicode).
-
-- **Mistake:** Assuming wireless data isn't binary.
-
-    **Correct understanding:** Wireless still carries binary data — it just uses radio waves instead of electrical or light signals.
-
-- **Mistake:** Thinking fiber sends electricity.
-
-    **Correct understanding:** Fiber transmits light pulses, not electrical current.
-
-- **Mistake:** Confusing inferred data with volunteered data.
-
-    **Correct understanding:** Inferred data is derived from behavior; volunteered data is intentionally provided.
+> [!WARNING]
+> - **Mistake:** Thinking a bit and a byte are the same.
+>   **Correct understanding:** A bit is one binary digit; a byte is a group of 8 bits.
+> - **Mistake:** Believing computers store letters directly.
+>   **Correct understanding:** Computers store only binary representations of letters (e.g., ASCII or Unicode).
+> - **Mistake:** Assuming wireless data isn't binary.
+>   **Correct understanding:** Wireless still carries binary data — it just uses radio waves instead of electrical or light signals.
+> - **Mistake:** Thinking fiber sends electricity.
+>   **Correct understanding:** Fiber transmits light pulses, not electrical current.
+> - **Mistake:** Confusing inferred data with volunteered data.
+>   **Correct understanding:** Inferred data is derived from behavior; volunteered data is intentionally provided.
 
 ## 📊 Comparisons
 
@@ -561,11 +480,11 @@ Sending a selfie over Wi-Fi: the photo becomes millions of bits, the phone conve
 | 🔎 Inferred data | Data derived from a user's behavior |
 | 📍 Observed data | Data collected automatically |
 
-### 🧠 Memory Tip – "ELR"
-
-- **E**lectrical (Copper) ⚡
-- **L**ight (Fiber) 💡
-- **R**adio (Wireless) 📡
+> [!TIP]
+> ### 🧠 Memory Tip – "ELR"
+> - **E**lectrical (Copper) ⚡
+> - **L**ight (Fiber) 💡
+> - **R**adio (Wireless) 📡
 
 ---
 
@@ -575,10 +494,9 @@ Sending a selfie over Wi-Fi: the photo becomes millions of bits, the phone conve
 
 Like a highway where the number of lanes limits how many cars *can* travel while actual traffic determines how many cars *do* travel, a network has a maximum capacity (**bandwidth**) and an actual achieved speed (**throughput**).
 
-```
-🛣️ Bandwidth  = Maximum Capacity
-🚗 Throughput = Actual Performance
-```
+> [!NOTE]
+> 🛣️ Bandwidth  = Maximum Capacity <br/>
+> 🚗 Throughput = Actual Performance
 
 ## ❓ Why do we need it?
 
@@ -586,23 +504,18 @@ Having a high-speed Internet plan doesn't guarantee that speed will always be ex
 
 ## ⚙️ How does it work?
 
-```
-  🏢 The ISP provides a maximum capacity, e.g. 100 Mbps
-        │
-        ▼
-  📥 A file download begins
-        │
-        ▼
-  👥 Other users on the same network start
-     streaming, downloading, or video calling
-        │
-        ▼
-  🚧 Network congestion occurs
-        │
-        ▼
-  📉 The actual download speed drops, e.g. to 62 Mbps
+```mermaid
+flowchart TD
+    A[🏢 The ISP provides a maximum capacity, e.g. 100 Mbps]
+    B[📥 A file download begins]
+    C[👥 Other users on the same network start streaming, downloading, or video calling]
+    D[🚧 Network congestion occurs]
+    E[📉 The actual download speed drops, e.g. to 62 Mbps]
+    
+    A --> B --> C --> D --> E
 ```
 
+> [!NOTE]  
 > **Result:** Bandwidth = 100 Mbps, Throughput = 62 Mbps — nothing is broken; the network simply couldn't deliver its full theoretical capacity under load.
 
 ## 🧩 Key Components
@@ -632,17 +545,17 @@ Having a high-speed Internet plan doesn't guarantee that speed will always be ex
 
 **🛣️ Highway analogy:**
 
-```
-Maximum cars possible        → 🛣️ Bandwidth
-Cars actually moving today   → 🚗 Throughput
-```
+- Maximum cars possible → 🛣️ **Bandwidth**
+- Cars actually moving today → 🚗 **Throughput**
 
 **🌐 Network communication path:**
 
-```
-Sender → Router → Switch → ISP → Internet → Server → Receiver
+```mermaid
+flowchart LR
+    S[Sender] --> R[Router] --> SW[Switch] --> I[ISP] --> Int((Internet)) --> Serv[Server] --> Rec[Receiver]
 ```
 
+> [!NOTE]  
 > Each device introduces a small delay, and overall throughput cannot exceed the capacity of the slowest connection in the path.
 
 ## 🌍 Real-Life Example
@@ -651,30 +564,25 @@ A water pipe that can carry 100 liters per minute (bandwidth) might only deliver
 
 ## 📌 Important Facts
 
-- Bandwidth is the maximum data transfer capacity; throughput is the actual achieved rate.
-- Bandwidth is measured in bits per second (bps), with common units Kbps, Mbps, Gbps, and Tbps.
-- 8 bits = 1 byte, so Mbps (megabits per second) and MB/s (megabytes per second) are different: 100 Mbps ÷ 8 = 12.5 MB/s.
-- Throughput is usually lower than bandwidth due to congestion, latency, processing, and protocol overhead.
-- The slowest link in a communication path determines the maximum end-to-end throughput.
-- Download speed is for receiving data; upload speed is for sending data.
+> [!IMPORTANT]
+> - Bandwidth is the maximum data transfer capacity; throughput is the actual achieved rate.
+> - Bandwidth is measured in bits per second (bps), with common units Kbps, Mbps, Gbps, and Tbps.
+> - 8 bits = 1 byte, so Mbps (megabits per second) and MB/s (megabytes per second) are different: 100 Mbps ÷ 8 = 12.5 MB/s.
+> - Throughput is usually lower than bandwidth due to congestion, latency, processing, and protocol overhead.
+> - The slowest link in a communication path determines the maximum end-to-end throughput.
+> - Download speed is for receiving data; upload speed is for sending data.
 
 ## ⚠️ Common Beginner Mistakes
 
-- **Mistake:** Treating bandwidth and throughput as the same thing.
-
-    **Correct understanding:** Bandwidth is the maximum possible rate; throughput is the actual achieved rate.
-
-- **Mistake:** Assuming Mbps means megabytes per second.
-
-    **Correct understanding:** Mbps = megabits per second; MB/s = megabytes per second (8× difference).
-
-- **Mistake:** Believing a 1 Gbps Internet plan guarantees 1 Gbps downloads.
-
-    **Correct understanding:** Real-world throughput depends on server capacity, Wi-Fi quality, congestion, and device performance.
-
-- **Mistake:** Assuming every network segment always runs at its highest speed.
-
-    **Correct understanding:** End-to-end performance is limited by the slowest link in the path.
+> [!WARNING]
+> - **Mistake:** Treating bandwidth and throughput as the same thing.
+>   **Correct understanding:** Bandwidth is the maximum possible rate; throughput is the actual achieved rate.
+> - **Mistake:** Assuming Mbps means megabytes per second.
+>   **Correct understanding:** Mbps = megabits per second; MB/s = megabytes per second (8× difference).
+> - **Mistake:** Believing a 1 Gbps Internet plan guarantees 1 Gbps downloads.
+>   **Correct understanding:** Real-world throughput depends on server capacity, Wi-Fi quality, congestion, and device performance.
+> - **Mistake:** Assuming every network segment always runs at its highest speed.
+>   **Correct understanding:** End-to-end performance is limited by the slowest link in the path.
 
 ## 📊 Comparisons
 
@@ -695,10 +603,10 @@ A water pipe that can carry 100 liters per minute (bandwidth) might only deliver
 | 📏 bps / Kbps / Mbps / Gbps / Tbps | Units of bandwidth, each 1000× the previous |
 | ⛓️ Slowest link rule | End-to-end throughput is capped by the weakest link in the path |
 
-### 🧠 Memory Tip
-
-- **B**andwidth = **B**iggest possible.
-- **T**hroughput = **T**rue speed you experience.
+> [!TIP]
+> ### 🧠 Memory Tip
+> - **B**andwidth = **B**iggest possible.
+> - **T**hroughput = **T**rue speed you experience.
 
 ---
 
@@ -706,22 +614,15 @@ A water pipe that can carry 100 liters per minute (bandwidth) might only deliver
 
 The end of Module 1 ties the three major topics together and introduces one key engineering principle: **redundancy and fault tolerance**.
 
-```
-  📡 Communication in a Connected World
-        │
-        ▼
-  1️⃣ Network Types
-        │
-        ▼
-  2️⃣ Data Transmission
-        │
-        ▼
-  3️⃣ Bandwidth & Throughput
-        │
-        ▼
-  ✅ Ready for Module 2
+```mermaid
+flowchart TD
+    A[📡 Communication in a Connected World] --> B[1️⃣ Network Types]
+    B --> C[2️⃣ Data Transmission]
+    C --> D[3️⃣ Bandwidth & Throughput]
+    D --> E[✅ Ready for Module 2]
 ```
 
+> [!NOTE]  
 > **🕸️ Redundancy concept:** the Internet is compared to a spider web — if one thread (path) breaks, the rest of the web continues supporting the structure, because data can often be redirected through another path. Example: a college with two ISPs can automatically switch traffic to the second ISP if the first fails, so students keep accessing services with little or no interruption.
 
 ## 📖 Key Terms (Module-wide)
@@ -744,7 +645,7 @@ The end of Module 1 ties the three major topics together and introduces one key 
 - Networks come in four common sizes: small home, SOHO, medium/large, and worldwide.
 - Modern networks connect far more than computers — phones, TVs, watches, and sensors all participate.
 - IoT (Internet of Things) refers to everyday physical devices that connect to the Internet to collect or act on data.
-- Sensors detect or measure information; actuators perform actions — "sensor = eyes, actuator = hands."
+- Sensors detect or measure information; actuators perform actions — *"sensor = eyes, actuator = hands."*
 - Personal data is volunteered (given intentionally), inferred (derived from behavior), or observed (collected automatically).
 - A **bit** is the smallest unit of data and can only be 0 or 1; 8 bits = 1 byte.
 - ASCII assigns a unique binary value to each character.
