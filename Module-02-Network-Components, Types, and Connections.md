@@ -8,6 +8,15 @@ This module explains how devices actually communicate on a network: the client/s
 
 ---
 
+## 📑 Table of Contents
+
+- [📖 Overview](#-overview)
+- [🖥️ Topic 1 – Clients, Servers, and Peer-to-Peer Networks](#️-topic-1--clients-servers-and-peer-to-peer-networks)
+- [🏗️ Topic 2 – Network Components & ISP Connectivity](#️-topic-2--network-components--isp-connectivity)
+- [🏁 Module Summary (Sections 2.4.1–2.4.2)](#-module-summary-sections-241242)
+
+---
+
 ## 📖 Overview
 
 - **What we cover:** Client/server roles, peer-to-peer networks and applications, standard network infrastructure symbols, end vs. intermediate devices, network media, ISP services, and common Internet connection technologies (cable, DSL, cellular, satellite, dial-up).
